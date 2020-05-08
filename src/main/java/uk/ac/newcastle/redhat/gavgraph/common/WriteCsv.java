@@ -1,22 +1,11 @@
 package uk.ac.newcastle.redhat.gavgraph.common;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-import org.apache.commons.io.IOUtils;
+import static org.apache.commons.io.IOUtils.closeQuietly;
 
 public class WriteCsv	 {
 
@@ -148,7 +137,7 @@ public class WriteCsv	 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			IOUtils.closeQuietly(out);
+			closeQuietly(out);
 		}
 	}
 

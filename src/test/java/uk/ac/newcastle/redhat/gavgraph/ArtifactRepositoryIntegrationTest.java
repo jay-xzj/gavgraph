@@ -2,13 +2,15 @@ package uk.ac.newcastle.redhat.gavgraph;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import uk.ac.newcastle.redhat.gavgraph.neo4j.Artifact;
 import uk.ac.newcastle.redhat.gavgraph.neo4j.ArtifactRepository;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,14 +25,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ArtifactRepositoryIntegrationTest {
 
     @SpringBootApplication
-    static class ExampleConfig {}
+    static class ExampleConfig {
+    }
 
-    @Autowired
+    @Resource
     ArtifactRepository artifactRepository;
 
-    /**
-     *
-     */
     @Test
     public void testSaveAndLoadArtifact(){
         Artifact log4j2 = new Artifact(
@@ -41,6 +41,8 @@ public class ArtifactRepositoryIntegrationTest {
                 "log4j-core",
                 "2.12.1");
         artifactRepository.save(log4j2);
+        List<Artifact> allByArtifactId = artifactRepository.getAllByArtifactId("spring-boot-starter-log4j2");
+        allByArtifactId.forEach(System.err::println);
         assertThat(artifactRepository.findById(log4j2.getId()))
                 .hasValueSatisfying(artifact -> {
                     assertThat(artifact.getGroupId()).isEqualTo(log4j2.getGroupId());

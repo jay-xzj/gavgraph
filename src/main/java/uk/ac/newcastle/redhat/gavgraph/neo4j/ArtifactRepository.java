@@ -1,7 +1,10 @@
 package uk.ac.newcastle.redhat.gavgraph.neo4j;
 
+import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
+
 import java.util.List;
+
 
 public interface ArtifactRepository extends Neo4jRepository<Artifact, Long> {
 
@@ -18,5 +21,8 @@ public interface ArtifactRepository extends Neo4jRepository<Artifact, Long> {
 
     List<Artifact> findAllDependenciesByArtifactId(String artifactId);
 
+
+    @Query("MATCH (a:Artifact) RETURN a ")
+    List<Artifact> getAllByArtifactId(String artifactId);
 
 }
