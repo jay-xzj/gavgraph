@@ -15,12 +15,6 @@ public interface ArtifactRepository extends Neo4jRepository<Artifact, Long> {
      */
     List<Artifact> findAllByArtifactIdAndGroupId(String artifactId);
 
-    /**
-     *
-     * @param rangeList a artifact range list which are already not available
-     * @return
-     */
-    //List<Artifact> findAllByArtifactIdAndGroupIdRange(List<Artifact> rangeList);
 
     List<Artifact> findAllDependenciesByArtifactId(String artifactId);
 
