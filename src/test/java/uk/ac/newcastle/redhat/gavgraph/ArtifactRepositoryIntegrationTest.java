@@ -50,7 +50,7 @@ public class ArtifactRepositoryIntegrationTest {
                             .satisfies(dependency->{
                                 assertThat(dependency.getGroupId()).isEqualTo("org.apache.logging.log4j");
                                 assertThat(dependency.getArtifactId()).isEqualTo("log4j-core");
-                                assertThat(dependency.getGroupId()).isEqualTo("2.12.1");
+                                assertThat(dependency.getVersion()).isEqualTo("2.12.1");
                             });
                 });
 
