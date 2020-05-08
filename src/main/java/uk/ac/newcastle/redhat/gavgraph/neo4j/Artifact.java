@@ -1,5 +1,6 @@
 package uk.ac.newcastle.redhat.gavgraph.neo4j;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -12,7 +13,7 @@ import java.util.Set;
  * This class will be like a node in a linked list or a graph,
  * there should be some 前继节点 and 后继节点
  */
-@NodeEntity(label = "Artifact")
+@NodeEntity
 //logging level ...
 public class Artifact {
 
@@ -22,6 +23,7 @@ public class Artifact {
     private String groupId;
     private String artifactId;
     private String version;
+    //@JsonIgnoreProperty("actor")
     private @Relationship(type = "DEPEND_ON")//Direction of the relationship. Defaults to OUTGOING.
     Set<Artifact> dependencies = new HashSet<>();
 
